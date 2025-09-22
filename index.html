@@ -1,385 +1,414 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <title>NOAH’S パーソナルトレーニング｜グルメを諦めない</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* ちょいアニメ */
-    .fade-up { opacity: 0; transform: translateY(8px); animation: fu .6s ease .05s forwards; }
-    @keyframes fu { to { opacity: 1; transform: translateY(0);} }
-  </style>
-</head>
-<body class="bg-gradient-to-b from-white to-slate-50 text-slate-800">
-  <a id="top"></a>
+import { useEffect } from "react";
 
-  <!-- ===== NAV ===== -->
-  <header class="sticky top-0 z-50 backdrop-blur bg-white/70 border-b">
-    <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
-      <a href="#top" class="font-bold text-lg tracking-wide">NOAH’S BOOT CAMP</a>
-      <nav class="hidden md:flex gap-6 text-sm">
-        <a href="#concept" class="hover:opacity-80">コンセプト</a>
-        <a href="#features" class="hover:opacity-80">特徴</a>
-        <a href="#method" class="hover:opacity-80">メソッド</a>
-        <a href="#support" class="hover:opacity-80">アフターサポート</a>
-        <a href="#pricing" class="hover:opacity-80">料金</a>
-        <a href="#faq" class="hover:opacity-80">FAQ</a>
-      </nav>
-      <div class="flex items-center gap-3">
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
-          target="_blank" rel="noreferrer"
-          class="inline-flex items-center justify-center px-4 py-2 rounded-2xl bg-slate-900 text-white hover:bg-slate-800">
-          無料相談を予約
-        </a>
-      </div>
-    </div>
-  </header>
+export default function NoahsBootCampLP() {
+  // --- Simple runtime "tests" to catch regressions in preview ---
+  useEffect(() => {
+    try {
+      const cards = document.querySelectorAll('[data-plan-card]');
+      console.assert(cards.length === 3, `Expected 3 pricing cards, got ${cards.length}`);
 
-  <!-- ===== HERO ===== -->
-  <section class="relative overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
-      <div class="fade-up">
-        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
-          グルメを諦めない。<br />
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600">
-            体ひとつで、理想の体へ。
-          </span>
-        </h1>
-        <p class="mt-5 text-base md:text-lg text-slate-600">
-          私は <strong>現役のグルメインフルエンサー</strong>として、これまで<strong>1800軒以上</strong>のお店を食べ歩いてきました。
-          寿司、焼肉、ラーメン、スイーツ、ワイン——食を心から楽しみながらも、体型や健康をキープ。
-          その実体験をベースにした<strong>「グルメのためのパーソナルトレーニング」</strong>を提供しています。
-        </p>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
-            target="_blank" rel="noreferrer"
-            class="inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-slate-900 text-white text-lg hover:bg-slate-800">
-            無料相談を予約する
-          </a>
-        </div>
-        <div class="mt-6 flex items-center gap-6 text-sm text-slate-500">
-          <div class="flex items-center gap-2">
-            <!-- utensils icon -->
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 3v7a2 2 0 0 0 2 2h0V3M8 3v9M12 3v9M18 21v-7M18 3a3 3 0 0 1 3 3v6h-6V6a3 3 0 0 1 3-3Z"/></svg>
-            1800+ 食べ歩き実績
-          </div>
-          <div class="flex items-center gap-2">
-            <!-- dumbbell -->
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 14v-4M7 17V7M10 12h4M17 17V7M21 14v-4"/></svg>
-            完全自重 / どこでもOK
-          </div>
-          <div class="flex items-center gap-2">
-            <!-- moon -->
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12a9 9 0 0 1-9 9c-3.9 0-7.2-2.4-8.5-5.7A8 8 0 0 0 12 3a9 9 0 0 1 9 9Z"/></svg>
-            生活習慣までトータル支援
+      const formLinks = Array.from(document.querySelectorAll('a[href^="https://docs.google.com/forms/"]'));
+      console.assert(formLinks.length >= 2, `Expected Google Form links to exist`);
+      formLinks.forEach((a: any) => {
+        console.assert(a.target === "_blank", "Form link should open in new tab");
+      });
+
+      const yearEl = Array.from(document.querySelectorAll("footer"))[0];
+      if (yearEl) {
+        const year = new Date().getFullYear().toString();
+        console.assert(yearEl.textContent?.includes(year), `Footer should include current year: ${year}`);
+      }
+
+      // Ensure no HTML-style comments slipped through
+      const html = document.documentElement.innerHTML;
+      console.assert(!html.includes("<!--"), "HTML comment syntax should not appear in JSX output");
+    } catch (e) {
+      console.warn("Runtime smoke tests failed:", e);
+    }
+  }, []);
+
+  return (
+    <div className="bg-gradient-to-b from-white to-slate-50 text-slate-800">
+      <a id="top"></a>
+
+      {/* ===== Styles (軽いアニメ) ===== */}
+      <style>{`
+        .fade-up { opacity: 0; transform: translateY(8px); animation: fu .6s ease .05s forwards; }
+        @keyframes fu { to { opacity: 1; transform: translateY(0);} }
+      `}</style>
+
+      {/* ===== NAV ===== */}
+      <header className="sticky top-0 z-50 backdrop-blur bg-white/70 border-b">
+        <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+          <a href="#top" className="font-bold text-lg tracking-wide">NOAH’S BOOT CAMP</a>
+          <nav className="hidden md:flex gap-6 text-sm">
+            <a href="#concept" className="hover:opacity-80">コンセプト</a>
+            <a href="#features" className="hover:opacity-80">特徴</a>
+            <a href="#method" className="hover:opacity-80">メソッド</a>
+            <a href="#support" className="hover:opacity-80">アフターサポート</a>
+            <a href="#pricing" className="hover:opacity-80">料金</a>
+            <a href="#faq" className="hover:opacity-80">FAQ</a>
+          </nav>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
+              target="_blank" rel="noreferrer"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-2xl bg-slate-900 text-white hover:bg-slate-800"
+            >
+              無料相談を予約
+            </a>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div class="fade-up">
-        <div class="border bg-white rounded-2xl shadow-xl p-4">
-          <div class="pb-2 border-b">
-            <div class="font-semibold">こんなあなたに</div>
-          </div>
-          <div class="space-y-3 text-slate-700 pt-4">
-            <div class="flex items-start gap-3 text-sm">
-              <svg class="w-4 h-4 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>
-              <span>食べ歩きや会食が多いが、体型は崩したくない</span>
-            </div>
-            <div class="flex items-start gap-3 text-sm">
-              <svg class="w-4 h-4 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>
-              <span>ジム通いは続かない。家や公園で完結させたい</span>
-            </div>
-            <div class="flex items-start gap-3 text-sm">
-              <svg class="w-4 h-4 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>
-              <span>お酒やスイーツも楽しみながら、賢く調整したい</span>
-            </div>
-            <div class="flex items-start gap-3 text-sm">
-              <svg class="w-4 h-4 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>
-              <span>その場限りではなく、日常レベルで習慣を整えたい</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CONCEPT & FEATURES ===== -->
-  <section id="concept" class="py-14 md:py-20 border-t bg-white">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-bold mb-4">コンセプト</h2>
-        <p class="text-slate-700 leading-relaxed">
-          「食べても太らない」「飲んでも動ける」。その両立を、<strong>自重トレーニング×生活設計</strong>で実現します。
-          プログラムはレベル制で段階的に進行。フォームを整え、関節に優しく、基礎代謝と機能的な強さを底上げします。
-        </p>
-        <ul class="mt-6 space-y-3 text-slate-700">
-          <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>短時間でも効率よく消費するプロトコル</li>
-          <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>“どこでも”できるから継続しやすい</li>
-          <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>外食前提のPFC設計と回復ルーティン</li>
-        </ul>
-      </div>
-
-      <div id="features" class="grid sm:grid-cols-2 gap-4">
-        <!-- Feature Card -->
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="pb-2 border-b flex items-center gap-3">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 14v-4M7 17V7M10 12h4M17 17V7M20 14v-4"/></svg>
-            <div class="font-semibold text-base">完全自重メソッド</div>
-          </div>
-          <div class="text-sm text-slate-600 pt-3">
-            プリズナートレーニング（BIG6）を軸に、器具やマシンに頼らず“どこでも”結果が出る設計。
-          </div>
-        </div>
-
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="pb-2 border-b flex items-center gap-3">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 3v9M4 3v7a2 2 0 0 0 2 2M12 3v9M18 21v-7M18 3a3 3 0 0 1 3 3v6h-6V6a3 3 0 0 1 3-3Z"/></svg>
-            <div class="font-semibold text-base">グルメ前提の設計</div>
-          </div>
-          <div class="text-sm text-slate-600 pt-3">
-            寿司・焼肉・ラーメン・ワイン・スイーツ。食べ歩きを前提に、増減のコントロールを具体化。
-          </div>
-        </div>
-
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="pb-2 border-b flex items-center gap-3">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5V5.6a2 2 0 0 1 .9-1.7l6.2-3.7 6.2 3.7a2 2 0 0 1 .9 1.7v13.9a2 2 0 0 1-1 1.8L11.1 24l-6.1-2.7a2 2 0 0 1-1-1.8z"/></svg>
-            <div class="font-semibold text-base">改善レポート付き</div>
-          </div>
-          <div class="text-sm text-slate-600 pt-3">
-            運動・食事・睡眠を統合した“あなただけのレポート”を後日お渡し。実生活で迷わない。
-          </div>
-        </div>
-
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="pb-2 border-b flex items-center gap-3">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11h18M8 7h8M6 15h12M4 19h16"/></svg>
-            <div class="font-semibold text-base">受講スタイル</div>
-          </div>
-          <div class="text-sm text-slate-600 pt-3 space-y-1">
-            <div>・オンライン（全国対応）</div>
-            <div>・公園セッション</div>
-            <div>・自宅訪問（マンツーマン）</div>
-            <div>・四ツ谷の簡易ジム</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== METHOD ===== -->
-  <section id="method" class="py-14 md:py-20 border-t">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold">メソッド：プリズナートレーニング（BIG6）</h2>
-      <p class="mt-3 text-slate-700">腕立て・スクワット・懸垂・レッグレイズ・ブリッジ・倒立腕立て。レベル1→10で段階的に成長します。</p>
-      <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- 4枚カード（簡易説明） -->
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="font-semibold text-base">オンライン（全国対応）</div>
-          <div class="text-sm text-slate-600 mt-2">環境に縛られず継続しやすい。</div>
-        </div>
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="font-semibold text-base">公園セッション</div>
-          <div class="text-sm text-slate-600 mt-2">自然の中で集中・リフレッシュ。</div>
-        </div>
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="font-semibold text-base">自宅訪問（マンツーマン）</div>
-          <div class="text-sm text-slate-600 mt-2">移動ゼロで効率良く。</div>
-        </div>
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="font-semibold text-base">四ツ谷の簡易ジム</div>
-          <div class="text-sm text-slate-600 mt-2">必要な設備のみでミニマムに。</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SUPPORT / REPORT ===== -->
-  <section id="support" class="py-14 md:py-20 border-t bg-white">
-    <div class="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-bold">アフターサポート：パーソナルレポート</h2>
-        <p class="mt-3 text-slate-700">セッション後、“迷わない”ための道しるべを必ずお渡しします。</p>
-        <ul class="mt-6 space-y-3 text-slate-700">
-          <li class="flex gap-3"><svg class="w-5 h-5 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>外食シーン別の食べ方（寿司/焼肉/居酒屋/カフェなど）</li>
-          <li class="flex gap-3"><svg class="w-5 h-5 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>旅行・食べ歩き日の調整プラン</li>
-          <li class="flex gap-3"><svg class="w-5 h-5 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>飲み会・甘いもの後の回復プロトコル</li>
-          <li class="flex gap-3"><svg class="w-5 h-5 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>睡眠・リカバリー習慣の最適化</li>
-        </ul>
-      </div>
-
-      <div class="border bg-white rounded-2xl p-4">
-        <div class="pb-2 border-b font-semibold">受講の流れ</div>
-        <div class="space-y-4 text-slate-700 text-sm pt-4">
-          <div class="flex gap-4">
-            <div class="shrink-0 w-9 h-9 rounded-full bg-slate-900 text-white grid place-items-center font-semibold">1</div>
-            <div><div class="font-semibold">無料相談（15–20分）</div><div class="text-slate-600">目的・生活リズム・好きな食の傾向をヒアリング。</div></div>
-          </div>
-          <div class="flex gap-4">
-            <div class="shrink-0 w-9 h-9 rounded-full bg-slate-900 text-white grid place-items-center font-semibold">2</div>
-            <div><div class="font-semibold">体験セッション</div><div class="text-slate-600">基礎動作のチェックと、あなた専用の課題抽出。</div></div>
-          </div>
-          <div class="flex gap-4">
-            <div class="shrink-0 w-9 h-9 rounded-full bg-slate-900 text-white grid place-items-center font-semibold">3</div>
-            <div><div class="font-semibold">本セッション開始</div><div class="text-slate-600">自重トレ×生活設計をレベル制で進行。</div></div>
-          </div>
-          <div class="flex gap-4">
-            <div class="shrink-0 w-9 h-9 rounded-full bg-slate-900 text-white grid place-items-center font-semibold">4</div>
-            <div><div class="font-semibold">レポート納品</div><div class="text-slate-600">運動・食事・睡眠まで統合した改善計画をお渡し。</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PRICING ===== -->
-  <section id="pricing" class="py-14 md:py-20 border-t">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold">料金プラン</h2>
-      <p class="mt-2 text-slate-700">目的や頻度に合わせてお選びください。回数券はお得です。</p>
-      <div class="mt-8 grid md:grid-cols-3 gap-4">
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="pb-2 border-b font-semibold">単発セッション</div>
-          <div class="pt-3 text-slate-700">
-            <div class="text-3xl font-extrabold">¥12,000</div>
-            <p class="mt-2 text-sm">1回ごとのお支払い。まずは試したい方に。</p>
-          </div>
-        </div>
-
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="pb-2 border-b font-semibold">回数券 × 4</div>
-          <div class="pt-3 text-slate-700">
-            <div class="text-3xl font-extrabold">¥40,000</div>
-            <p class="mt-2 text-sm">
-              1回あたり約 ¥10,000
-              <span class="inline-block ml-2 text-xs bg-slate-900 text-white px-2 py-0.5 rounded-full">約¥8,000お得/4回比</span>
+      {/* ===== HERO ===== */}
+      <section className="relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+          <div className="fade-up">
+            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
+              グルメを諦めない。<br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600">
+                体ひとつで、理想の体へ。
+              </span>
+            </h1>
+            <p className="mt-5 text-base md:text-lg text-slate-600">
+              私は <strong>現役のグルメインフルエンサー</strong>として、これまで<strong>1800軒以上</strong>のお店を食べ歩いてきました。
+              寿司、焼肉、ラーメン、スイーツ、ワイン——食を心から楽しみながらも、体型や健康をキープ。
+              その実体験をベースにした<strong>「グルメのためのパーソナルトレーニング」</strong>を提供しています。
             </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
+                target="_blank" rel="noreferrer"
+                className="inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-slate-900 text-white text-lg hover:bg-slate-800"
+              >
+                無料相談を予約する
+              </a>
+            </div>
+            <div className="mt-6 flex items-center gap-6 text-sm text-slate-500">
+              <div className="flex items-center gap-2">
+                {/* utensils icon */}
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 3v7a2 2 0 0 0 2 2h0V3M8 3v9M12 3v9M18 21v-7M18 3a3 3 0 0 1 3 3v6h-6V6a3 3 0 0 1 3-3Z"/></svg>
+                1800+ 食べ歩き実績
+              </div>
+              <div className="flex items-center gap-2">
+                {/* dumbbell */}
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 14v-4M7 17V7M10 12h4M17 17V7M21 14v-4"/></svg>
+                完全自重 / どこでもOK
+              </div>
+              <div className="flex items-center gap-2">
+                {/* moon */}
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12a9 9 0 0 1-9 9c-3.9 0-7.2-2.4-8.5-5.7A8 8 0 0 0 12 3a9 9 0 0 1 9 9Z"/></svg>
+                生活習慣までトータル支援
+              </div>
+            </div>
+          </div>
+
+          <div className="fade-up">
+            <div className="border bg-white rounded-2xl shadow-xl p-4">
+              <div className="pb-2 border-b">
+                <div className="font-semibold">こんなあなたに</div>
+              </div>
+              <div className="space-y-3 text-slate-700 pt-4">
+                {[
+                  '食べ歩きや会食が多いが、体型は崩したくない',
+                  'ジム通いは続かない。家や公園で完結させたい',
+                  'お酒やスイーツも楽しみながら、賢く調整したい',
+                  'その場限りではなく、日常レベルで習慣を整えたい',
+                ].map((t, i) => (
+                  <div key={i} className="flex items-start gap-3 text-sm">
+                    <svg className="w-4 h-4 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>
+                    <span>{t}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="pb-2 border-b font-semibold">回数券 × 48</div>
-          <div class="pt-3 text-slate-700">
-            <div class="text-3xl font-extrabold">¥400,000</div>
-            <p class="mt-2 text-sm">
-              1回あたり約 ¥8,333.33
-              <span class="inline-block ml-2 text-xs bg-slate-900 text-white px-2 py-0.5 rounded-full">合計約¥176,000お得</span>
+      {/* ===== CONCEPT & FEATURES ===== */}
+      <section id="concept" className="py-14 md:py-20 border-t bg-white">
+        <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">コンセプト</h2>
+            <p className="text-slate-700 leading-relaxed">
+              「食べても太らない」「飲んでも動ける」。その両立を、<strong>自重トレーニング×生活設計</strong>で実現します。
+              プログラムはレベル制で段階的に進行。フォームを整え、関節に優しく、基礎代謝と機能的な強さを底上げします。
             </p>
+            <ul className="mt-6 space-y-3 text-slate-700">
+              <li className="flex items-start gap-3"><svg className="w-5 h-5 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>短時間でも効率よく消費するプロトコル</li>
+              <li className="flex items-start gap-3"><svg className="w-5 h-5 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>“どこでも”できるから継続しやすい</li>
+              <li className="flex items-start gap-3"><svg className="w-5 h-5 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>外食前提のPFC設計と回復ルーティン</li>
+            </ul>
+          </div>
+
+          <div id="features" className="grid sm:grid-cols-2 gap-4">
+            {[
+              {
+                title: '完全自重メソッド',
+                icon: (
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 14v-4M7 17V7M10 12h4M17 17V7M20 14v-4"/></svg>
+                ),
+                desc: 'プリズナートレーニング（BIG6）を軸に、器具やマシンに頼らず“どこでも”結果が出る設計。',
+              },
+              {
+                title: 'グルメ前提の設計',
+                icon: (
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 3v9M4 3v7a2 2 0 0 0 2 2M12 3v9M18 21v-7M18 3a3 3 0 0 1 3 3v6h-6V6a3 3 0 0 1 3-3Z"/></svg>
+                ),
+                desc: '寿司・焼肉・ラーメン・ワイン・スイーツ。食べ歩きを前提に、増減のコントロールを具体化。',
+              },
+              {
+                title: '改善レポート付き',
+                icon: (
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5V5.6a2 2 0 0 1 .9-1.7l6.2-3.7 6.2 3.7a2 2 0 0 1 .9 1.7v13.9a2 2 0 0 1-1 1.8L11.1 24l-6.1-2.7a2 2 0 0 1-1-1.8z"/></svg>
+                ),
+                desc: '運動・食事・睡眠を統合した“あなただけのレポート”を後日お渡し。実生活で迷わない。',
+              },
+              {
+                title: '受講スタイル',
+                icon: (
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11h18M8 7h8M6 15h12M4 19h16"/></svg>
+                ),
+                desc: (
+                  <div className="text-sm text-slate-600 pt-1 space-y-1">
+                    <div>・オンライン（全国対応）</div>
+                    <div>・公園セッション</div>
+                    <div>・自宅訪問（マンツーマン）</div>
+                    <div>・四ツ谷の簡易ジム</div>
+                  </div>
+                ),
+              },
+            ].map((c, i) => (
+              <div key={i} className="border bg-white rounded-2xl p-4">
+                <div className="pb-2 border-b flex items-center gap-3">
+                  {c.icon}
+                  <div className="font-semibold text-base">{c.title}</div>
+                </div>
+                <div className="text-sm text-slate-600 pt-3">{c.desc}</div>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="mt-6 text-sm text-slate-500">
-        ※ 価格は税込 / お支払い・有効期限などの詳細はお問い合わせください。
-      </div>
-
-      <div class="mt-6 flex flex-wrap gap-3">
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
-          target="_blank" rel="noreferrer"
-          class="inline-flex items-center justify-center px-4 py-2 rounded-2xl bg-slate-900 text-white hover:bg-slate-800">
-          無料相談を予約
-        </a>
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
-          target="_blank" rel="noreferrer"
-          class="inline-flex items-center justify-center px-4 py-2 rounded-2xl border border-slate-300 text-slate-900 hover:bg-slate-50">
-          Googleフォームから申し込む
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CTA ===== -->
-  <section class="py-14 md:py-20 border-y bg-slate-900 text-white">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h3 class="text-2xl md:text-3xl font-bold">食の楽しみを我慢せず、最高の体で生きる。</h3>
-      <p class="mt-3 text-slate-300">今のライフスタイルのまま“整える”方法を、一緒に設計しましょう。</p>
-      <div class="mt-6 flex justify-center gap-3">
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
-          target="_blank" rel="noreferrer"
-          class="inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-white text-slate-900 text-lg hover:bg-slate-100">
-          無料相談を予約する
-        </a>
-        <a
-          href="https://instagram.com/noamankurou_gourmet"
-          target="_blank" rel="noreferrer"
-          class="inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-lg">
-          Instagramを見る
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FAQ ===== -->
-  <section id="faq" class="py-14 md:py-20">
-    <div class="max-w-5xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6">よくある質問</h2>
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="pb-2 border-b font-semibold text-base">運動初心者でも大丈夫？</div>
-          <div class="text-sm text-slate-600 pt-2">大丈夫です。レベル1から段階的に進めるため、体力に自信がない方でも安全に始められます。</div>
+      {/* ===== METHOD ===== */}
+      <section id="method" className="py-14 md:py-20 border-t">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-bold">メソッド：プリズナートレーニング（BIG6）</h2>
+          <p className="mt-3 text-slate-700">腕立て・スクワット・懸垂・レッグレイズ・ブリッジ・倒立腕立て。レベル1→10で段階的に成長します。</p>
+          <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              ['オンライン（全国対応）', '環境に縛られず継続しやすい。'],
+              ['公園セッション', '自然の中で集中・リフレッシュ。'],
+              ['自宅訪問（マンツーマン）', '移動ゼロで効率良く。'],
+              ['四ツ谷の簡易ジム', '必要な設備のみでミニマムに。'],
+            ].map(([title, desc]) => (
+              <div key={title} className="border bg-white rounded-2xl p-4">
+                <div className="font-semibold text-base">{title}</div>
+                <div className="text-sm text-slate-600 mt-2">{desc}</div>
+              </div>
+            ))}
+          </div>
         </div>
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="pb-2 border-b font-semibold text-base">器具は必要？</div>
-          <div class="text-sm text-slate-600 pt-2">不要です。自重で完結するため、家・公園・出張先でも実践できます。</div>
+      </section>
+
+      {/* ===== SUPPORT / REPORT ===== */}
+      <section id="support" className="py-14 md:py-20 border-t bg-white">
+        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold">アフターサポート：パーソナルレポート</h2>
+            <p className="mt-3 text-slate-700">セッション後、“迷わない”ための道しるべを必ずお渡しします。</p>
+            <ul className="mt-6 space-y-3 text-slate-700">
+              {[
+                '外食シーン別の食べ方（寿司/焼肉/居酒屋/カフェなど）',
+                '旅行・食べ歩き日の調整プラン',
+                '飲み会・甘いもの後の回復プロトコル',
+                '睡眠・リカバリー習慣の最適化',
+              ].map((item, i) => (
+                <li key={i} className="flex gap-3">
+                  <svg className="w-5 h-5 mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m5 12 5 5L20 7"/></svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="border bg-white rounded-2xl p-4">
+            <div className="pb-2 border-b font-semibold">受講の流れ</div>
+            <div className="space-y-4 text-slate-700 text-sm pt-4">
+              {[
+                ['1', '無料相談（15–20分）', '目的・生活リズム・好きな食の傾向をヒアリング。'],
+                ['2', '体験セッション', '基礎動作のチェックと、あなた専用の課題抽出。'],
+                ['3', '本セッション開始', '自重トレ×生活設計をレベル制で進行。'],
+                ['4', 'レポート納品', '運動・食事・睡眠まで統合した改善計画をお渡し。'],
+              ].map(([num, title, desc]) => (
+                <div key={num} className="flex gap-4">
+                  <div className="shrink-0 w-9 h-9 rounded-full bg-slate-900 text-white grid place-items-center font-semibold">{num}</div>
+                  <div>
+                    <div className="font-semibold">{title}</div>
+                    <div className="text-slate-600">{desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="pb-2 border-b font-semibold text-base">食べ歩きが多くても痩せられる？</div>
-          <div class="text-sm text-slate-600 pt-2">“外食前提”でPFCと活動量を設計します。楽しみを残したまま、無理なく調整します。</div>
+      </section>
+
+      {/* ===== PRICING ===== */}
+      <section id="pricing" className="py-14 md:py-20 border-t">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-bold">料金プラン</h2>
+          <p className="mt-2 text-slate-700">目的や頻度に合わせて選べる月額プランです。</p>
+
+          <div className="mt-8 grid md:grid-cols-3 gap-4">
+            {/* ライトプラン */}
+            <div className="border bg-white rounded-2xl p-4" data-plan-card="light">
+              <div className="pb-2 border-b font-semibold">ライトプラン</div>
+              <div className="pt-3 text-slate-700">
+                <div className="text-3xl font-extrabold">¥8,000 <span className="text-base font-medium">/ 月</span></div>
+                <ul className="mt-4 space-y-2 text-sm">
+                  <li>月2回（30分オンラインセッション）</li>
+                  <li>生活習慣アドバイス</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* スタンダードプラン */}
+            <div className="border bg-white rounded-2xl p-4" data-plan-card="standard">
+              <div className="pb-2 border-b font-semibold">スタンダードプラン</div>
+              <div className="pt-3 text-slate-700">
+                <div className="text-3xl font-extrabold">¥15,000 <span className="text-base font-medium">/ 月</span></div>
+                <ul className="mt-4 space-y-2 text-sm">
+                  <li>週1回（30分オンラインorオフラインセッション）</li>
+                  <li>生活習慣アドバイス＋月1回のレポート付き</li>
+                  <li className="text-slate-600 text-xs">（食事・運動・睡眠の改善ポイントをまとめたフィードバック）</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* プレミアムプラン */}
+            <div className="border bg-white rounded-2xl p-4" data-plan-card="premium">
+              <div className="pb-2 border-b font-semibold">プレミアムプラン</div>
+              <div className="pt-3 text-slate-700">
+                <div className="text-3xl font-extrabold">¥24,000 <span className="text-base font-medium">/ 月</span></div>
+                <ul className="mt-4 space-y-2 text-sm">
+                  <li>週2回（30分オンラインorオフラインセッション）</li>
+                  <li>生活習慣アドバイス＋月2回のレポート付き</li>
+                  <li className="text-slate-600 text-xs">（細かい進捗チェックと次月プランニング）</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 text-sm text-slate-500">
+            ※ 価格は税込 / セッションの実施形態（オンライン・オフライン）はご希望に合わせて調整可能です。
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
+              target="_blank" rel="noreferrer"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-2xl bg-slate-900 text-white hover:bg-slate-800"
+            >
+              無料相談を予約
+            </a>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
+              target="_blank" rel="noreferrer"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-2xl border border-slate-300 text-slate-900 hover:bg-slate-50"
+            >
+              Googleフォームから申し込む
+            </a>
+          </div>
         </div>
-        <div class="border bg-white rounded-2xl p-4">
-          <div class="pb-2 border-b font-semibold text-base">どこで受講できる？</div>
-          <div class="text-sm text-slate-600 pt-2">オンライン、公園、自宅訪問、四ツ谷の簡易ジムから選べます。</div>
+      </section>
+
+      {/* ===== CTA ===== */}
+      <section className="py-14 md:py-20 border-y bg-slate-900 text-white">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <h3 className="text-2xl md:text-3xl font-bold">食の楽しみを我慢せず、最高の体で生きる。</h3>
+          <p className="mt-3 text-slate-300">今のライフスタイルのまま“整える”方法を、一緒に設計しましょう。</p>
+        
+          <div className="mt-6 flex justify-center gap-3">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
+              target="_blank" rel="noreferrer"
+              className="inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-white text-slate-900 text-lg hover:bg-slate-100"
+            >
+              無料相談を予約する
+            </a>
+            <a
+              href="https://instagram.com/noamankurou_gourmet"
+              target="_blank" rel="noreferrer"
+              className="inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-slate-700 hover:bg-slate-600 text-lg"
+            >
+              Instagramを見る
+            </a>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* ===== FAQ ===== */}
+      <section id="faq" className="py-14 md:py-20">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6">よくある質問</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {[
+              ['運動初心者でも大丈夫？', '大丈夫です。レベル1から段階的に進めるため、体力に自信がない方でも安全に始められます。'],
+              ['器具は必要？', '不要です。自重で完結するため、家・公園・出張先でも実践できます。'],
+              ['食べ歩きが多くても痩せられる？', '“外食前提”でPFCと活動量を設計します。楽しみを残したまま、無理なく調整します。'],
+              ['どこで受講できる？', 'オンライン、公園、自宅訪問、四ツ谷の簡易ジムから選べます。'],
+            ].map(([q, a], i) => (
+              <div key={i} className="border bg-white rounded-2xl p-4">
+                <div className="pb-2 border-b font-semibold text-base">{q}</div>
+                <div className="text-sm text-slate-600 pt-2">{a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== CONTACT ===== */}
+      <section id="contact" className="py-14 md:py-20 border-t bg-white">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-bold">無料相談・お申し込み</h2>
+          <p className="mt-2 text-slate-600 text-sm">下記のGoogleフォーム、またはメールにてご連絡ください。</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
+              target="_blank" rel="noreferrer"
+              className="inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-slate-900 text-white text-lg hover:bg-slate-800"
+            >
+              Googleフォームを開く
+            </a>
+            <a
+              href="mailto:fujisawaryo24@gmail.com"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl border border-slate-300 text-slate-900 text-lg hover:bg-slate-50"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m4 6 8 6 8-6"/><rect x="4" y="6" width="16" height="12" rx="2"/></svg>
+              メールで問い合わせる
+            </a>
+          </div>
+          <div className="mt-6 flex flex-wrap items-center gap-4 text-slate-600 text-sm">
+            <a href="mailto:fujisawaryo24@gmail.com" className="inline-flex items-center gap-2 hover:underline">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m4 6 8 6 8-6"/><rect x="4" y="6" width="16" height="12" rx="2"/></svg>
+              fujisawaryo24@gmail.com
+            </a>
+            <span className="opacity-40">|</span>
+            <a href="https://instagram.com/noamankurou_gourmet" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:underline">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+              @noamankurou_gourmet
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer className="py-8 text-center text-slate-500 text-sm">
+        © {new Date().getFullYear()} NOAH’S BOOT CAMP — グルメを諦めないパーソナルトレーニング
+      </footer>
     </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section id="contact" class="py-14 md:py-20 border-t bg-white">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold">無料相談・お申し込み</h2>
-      <p class="mt-2 text-slate-600 text-sm">下記のGoogleフォーム、またはメールにてご連絡ください。</p>
-      <div class="mt-6 flex flex-wrap gap-3">
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfw7vkYeE_wEz9QRQLLXqBWWwzNf3rVQp4JDR9sjMNzS6PdSw/viewform?usp=sharing&ouid=108758503182081438429"
-          target="_blank" rel="noreferrer"
-          class="inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-slate-900 text-white text-lg hover:bg-slate-800">
-          Googleフォームを開く
-        </a>
-        <a
-          href="mailto:fujisawaryo24@gmail.com"
-          class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl border border-slate-300 text-slate-900 text-lg hover:bg-slate-50">
-          <!-- mail icon -->
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m4 6 8 6 8-6"/><rect x="4" y="6" width="16" height="12" rx="2"/></svg>
-          メールで問い合わせる
-        </a>
-      </div>
-      <div class="mt-6 flex flex-wrap items-center gap-4 text-slate-600 text-sm">
-        <a href="mailto:fujisawaryo24@gmail.com" class="inline-flex items-center gap-2 hover:underline">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m4 6 8 6 8-6"/><rect x="4" y="6" width="16" height="12" rx="2"/></svg>
-          fujisawaryo24@gmail.com
-        </a>
-        <span class="opacity-40">|</span>
-        <a href="https://instagram.com/noamankurou_gourmet" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 hover:underline">
-          <!-- instagram glyph (simple) -->
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-          @noamankurou_gourmet
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="py-8 text-center text-slate-500 text-sm">
-    © <script>document.write(new Date().getFullYear())</script> NOAH’S BOOT CAMP — グルメを諦めないパーソナルトレーニング
-  </footer>
-</body>
-</html>
-
+  );
+}
